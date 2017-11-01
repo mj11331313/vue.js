@@ -6,9 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
         li{
             background: #ccc;
             cursor: pointer;
+            list-style: none;
+        }
+        #div1{
+            padding: 20px;
         }
         .red{
             background: red;
@@ -17,7 +25,8 @@
 </head>
 <body>
     <div id="div1">
-            <input type="number" v-model="num" @keyup.13="add">
+            <input type="text" v-model.trim="num" @keyup.13="add">
+            <button @click="delete">删除</button>
             <ul>
                 <li v-for="item in list" @click="change(item)" :class="{'red':item.isRed == true}" >
                     <input type="checkbox" v-model="item.isRed" @click="change(item)"/>{{item.name}}--{{item.sell}}
@@ -51,10 +60,10 @@
         },
         methods:{
             add(){
-                this.price = parseInt(this.num);
+                this.price = parseInt(this.num.split(" ")[1]);
                 this.list.push({
-                    name:"",
-                    sell:this.num,
+                    name:this.num.split(" ")[0],
+                    sell:this.price,
                     isRed:false
                 });
             },
