@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            background: #ccc;
+        }
+        .red{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+            <input type="number" v-model="num" @keyup.13="add">
+            <ul>
+                <li v-for="item in list" @click="change($event)" :class="{'red':item.isRed == true}" >
+                        {{item}}
+                </li>
+            </ul>
+            <span>总价：{{sum}}</span>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:'#div1',
+        data:{
+            num:0,
+            price:0,
+            sum:0,
+            list:[23,34],
+            list: [
+                {
+                    name: 23,
+                    isRedn :false
+                }
+            ]
+        },
+        methods:{
+            add(){
+                this.price = this.num;
+                this.list.push(this.num);
+            },
+            change(e){
+                e.isRed=!e.isRed;
+            }
+        }
+    })
+    </script>
+</body>
+</html>
