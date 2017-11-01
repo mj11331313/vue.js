@@ -25,11 +25,12 @@
 </head>
 <body>
     <div id="div1">
+            <button @click="checkAll">全选</button>
             <input type="text" v-model.trim="num" @keyup.13="add">
-            <button @click="delete">删除</button>
+            <button @click="del">删除</button>
             <ul>
                 <li v-for="item in list" @click="change(item)" :class="{'red':item.isRed == true}" >
-                    <input type="checkbox" v-model="item.isRed" @click="change(item)"/>{{item.name}}--{{item.sell}}
+                    <input type="checkbox" v-model="item.isRed" />{{item.name}}--{{item.sell}}
                 </li>
             </ul>
             <span>总价：{{sum}}</span>
@@ -75,6 +76,12 @@
                     this.sum-=parseInt(item.sell);
                 }
 
+            },
+            del(){
+
+            },
+            checkAll(){
+                
             }
         }
     })
