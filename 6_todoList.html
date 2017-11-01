@@ -8,6 +8,7 @@
     <style>
         li{
             background: #ccc;
+            cursor: pointer;
         }
         .red{
             background: red;
@@ -18,8 +19,8 @@
     <div id="div1">
             <input type="number" v-model="num" @keyup.13="add">
             <ul>
-                <li v-for="item in list" @click="change($event)" :class="{'red':item.isRed == true}" >
-                        {{item}}
+                <li v-for="item in list" @click="change(item)" :class="{'red':item.isRed == true}" >
+                    <input type="checkbox" v-model="item.isRed" @click="change(item)"/>{{item.name}}--{{item.sell}}
                 </li>
             </ul>
             <span>总价：{{sum}}</span>
@@ -32,21 +33,39 @@
             num:0,
             price:0,
             sum:0,
-            list:[23,34],
             list: [
                 {
-                    name: 23,
-                    isRedn :false
+                    name: "衣服",
+                    sell:121,
+                    isRed:false
+                },{
+                    name: "鞋",
+                    sell:90,
+                    isRed:false
+                },{
+                    name: "衬衫",
+                    sell:100,
+                    isRed:false
                 }
             ]
         },
         methods:{
             add(){
-                this.price = this.num;
-                this.list.push(this.num);
+                this.price = parseInt(this.num);
+                this.list.push({
+                    name:"",
+                    sell:this.num,
+                    isRed:false
+                });
             },
-            change(e){
-                e.isRed=!e.isRed;
+            change(item){
+                item.isRed=!item.isRed;
+                if(item.isRed){
+                    this.sum+=parseInt(item.sell);
+                }else{
+                    this.sum-=parseInt(item.sell);
+                }
+
             }
         }
     })
