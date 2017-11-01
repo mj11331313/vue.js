@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <!-- v-text不会解析标签，可解决数据载入不稳定问题，用户体验·较好： -->
+        <div v-text="msg"></div><!--相当于<div>{{msg}}</div>-->
+        <!-- v-html可以解析标签，不安全，不建议使用： -->
+        <div v-html="msg"></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:'#div1',
+            data:{
+                msg:'<h1>hello</h1>'
+            }
+        })
+    </script>
+</body>
+</html>
