@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <!-- 循环普通数组： -->
+        <ul>
+            <!-- 循环list数组，生成对应li: -->
+            <li v-for="(school,index) in list" :key="index">
+                {{school}}:{{index}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="item in sortArr"><!--item为值-->
+                {{item}}
+            </li>
+        </ul>
+        <!-- 循环对象： -->
+        <ul>
+            <li v-for="(key,val,index) in obj">
+                {{index}}:{{key}}:{{val}}
+            </li>
+        </ul>
+        <!-- 循环对象数组： -->
+        <ul>
+            <li v-for="user in users">
+                {{user.name}}:{{user.age}}
+            </li>
+        </ul>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:'#div1',
+            data:{
+                list:['a','b','c'],
+                arr:[4,7,1,8,5,12],
+                obj:{
+                    name:"zhang",
+                    age:15
+                },
+                users:[
+                    {
+                        name:"zhangsan",
+                        age:17
+                    },
+                    {
+                        name:"lisi",
+                        age:20
+                    }
+                ]
+            },
+            computed:{
+                sortArr:function(){//排序函数
+                    return this.arr.sort(function(a,b){//对arr数组进行排序
+                        return a-b;
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        {{msg}}
+        <!-- v-if若不显示则对应的dom结构也不会存在 -->
+        <!-- if else: -->
+        <div v-if="login">welcome</div>
+        <div v-else="notLogin">login first</div>
+
+        <!-- 多分支判断: -->
+        <div v-if="type == 'A'">A</div>
+        <div v-else-if="type == 'B'">B</div>
+        <div v-else>C</div>
+
+        <!-- v-show只改变display的值： -->
+        <div v-show="isShow">show</div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#div1',
+            data:{
+                msg:'hello',
+                login:false,//true则显示v-if,false则显示v-else
+                type:'D',
+                isShow:false
+            }
+        })
+    </script>
+</body>
+</html>
