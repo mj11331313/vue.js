@@ -14,12 +14,19 @@
             background: #ccc;
             cursor: pointer;
             list-style: none;
+            height: 30px;
+            line-height: 30px;
+            margin-bottom: 5px;
         }
         #div1{
             padding: 20px;
+            width: 50%;
         }
         .red{
             background: red;
+        }
+        .none{
+            display: none;
         }
     </style>
 </head>
@@ -57,7 +64,8 @@
                     sell:100,
                     isRed:false
                 }
-            ]
+            ],
+            check:[]
         },
         methods:{
             add(){
@@ -74,14 +82,16 @@
                     this.sum+=parseInt(item.sell);
                 }else{
                     this.sum-=parseInt(item.sell);
-                }
-
+                };
+                this.check.push(item);
             },
             del(){
-
+                console.log(this.check);
             },
             checkAll(){
-
+                for(var p in this.list){
+                    p.isRed=true;
+                }
             }
         }
     })
