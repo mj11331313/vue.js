@@ -34,10 +34,11 @@
     <div id="div1">
             <button @click="checkAll">全选</button>
             <input type="text" v-model.trim="num" @keyup.13="add">
-            <button @click="del">删除</button>
+            <button @click="del">删除</button><br>
+            <input type="text" v-model="find" @keyup="search" @focus="find" placeholder="请输入搜索关键字">
             <ul>
-                <li v-for="item in list" @click="change(item)" :class="{'red':item.isRed == true}" >
-                    <input type="checkbox" v-model="item.isRed" />{{item.name}}--{{item.sell}}
+                <li v-for="(item,index) in list" @click="change(item)" :class="{'red':item.isRed}" >
+                    <input type="checkbox" @click.stop="" v-model="checked" :value="index"/>{{item.name}}--{{item.sell}}
                 </li>
             </ul>
             <span>总价：{{sum}}</span>
@@ -46,6 +47,7 @@
     <script>
     new Vue({
         el:'#div1',
+        find:'',
         data:{
             num:0,
             price:0,
@@ -54,18 +56,18 @@
                 {
                     name: "衣服",
                     sell:121,
-                    isRed:false
+                    isRed:false,
                 },{
                     name: "鞋",
                     sell:90,
-                    isRed:false
+                    isRed:false,
                 },{
                     name: "衬衫",
                     sell:100,
-                    isRed:false
+                    isRed:false,
                 }
             ],
-            check:[]
+            checked:[]
         },
         methods:{
             add(){
@@ -83,14 +85,36 @@
                 }else{
                     this.sum-=parseInt(item.sell);
                 };
-                this.check.push(item);
             },
             del(){
-                console.log(this.check);
+                this.list=this.list.filter((val,index)=>{
+                    //删除前判断价格是否已经被统计，是则删除的同时减去要删除的价格
+                    if(this.checked.includes(index) && val.isRed){
+                        this.sum-=parseInt(val.sell);
+                    };
+                    if(!this.checked.includes(index)){
+                        return val;
+                    }
+                });
+                this.checked=[];
             },
             checkAll(){
-                for(var p in this.list){
-                    p.isRed=true;
+               this.list.forEach((val,index)=>{
+                   val.checked="true";
+               });
+            },
+            search(){
+                this.list.forEach((val,index)=>{
+                    if(val.name.includes(this.find)){
+                        val.isRed="true";
+                    }
+                })
+            },
+            find(){
+                if(this.find ==""){
+                    this.list.forEach((val,index)=>{
+                        val.isRed="false";
+                    })
                 }
             }
         }
