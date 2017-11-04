@@ -40,7 +40,6 @@
     <div id="div1">
             <input type="text" v-model.trim="num" @keyup.13="add" placeholder="请输入要添加的内容"><br>
             <input type="text" v-model.trim="find" @keyup="search" placeholder="请输入搜索关键字">            
-            <button @click="checkAll">全选</button>            
             <button @click="del">删除</button>
             <ul>
                 <li v-for="(item,index) in list" @click="change(item)" :class="{'red':item.isRed,'blue':item.isBlue}" >
@@ -76,7 +75,7 @@
                     isBlue:false
                 }
             ],
-            checked:[]
+            checked:[],
         },
         methods:{
             add(){
@@ -108,11 +107,6 @@
                     }
                 });
                 this.checked=[];
-            },
-            checkAll(){
-               this.list.forEach((val,index)=>{
-                   val.child.checked=true;
-               });
             },
             search(){
                 this.list.forEach((val,index)=>{
