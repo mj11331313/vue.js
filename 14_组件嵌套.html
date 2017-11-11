@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <family :msg="msg"></family>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        let child={
+            template:`<h1>{{cmsg}}</h1>`,
+            props:["cmsg"]
+        };
+        let parent={
+            template:`
+            <div>
+                <h1>这是父组件{{msg}}</h1>
+                <ch cmsg="这是子组件"></ch>
+                <ch :cmsg="msg"></ch>
+            </div>
+            `,
+            components:{
+                ch:child
+            },
+            props:['msg']
+        };
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"msg111"
+            },
+            components:{
+                family:parent
+            }
+        })
+    </script>
+</body>
+</html>
