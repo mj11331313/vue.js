@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="change">改变</button>
+        <button @click="destroy">销毁</button>
+        {{msg}}
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:0,
+                timer:null
+            },
+            methods:{
+                change(){
+                    this.msg++;
+                },
+                destroy(){
+                    vm.$destroy();
+                }
+            },
+            //在实例初始化之后，数据观测和事件配置之前被调用:
+            beforeCreate(){
+                console.log("beforeCreate");
+            },
+            //在实例创建完成后被立即调用:(计时器通常写在这里):
+            created(){
+                console.log("created");
+                this.timer=setInterval(()=>{
+                    console.log("timer");
+                },1000)
+            },
+            //在挂载开始之前被调用:
+            beforeMount(){
+                console.log("beforeMount");
+            },
+            //挂载开始后调用:
+            mounted(){
+                console.log("mounted");
+            },
+            //数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前:
+            beforeUpdate(){
+                console.log("beforeUpdate");
+            },
+            //数据更新后调用:
+            updated(){
+                console.log("updated");
+            },
+            //指令和数据解绑之前调用(如:计时器应先在解绑前清除):
+            beforeDestroy(){
+                console.log("beforeDestroy");
+                clearInterval(this.timer);
+            },
+            //解绑后调用:
+            destroyed(){
+                console.log("destroyed");
+            }
+        })
+    </script>
+</body>
+</html>
