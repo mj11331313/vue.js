@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .mask{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ccc;
+        }
+        .box{
+            width: 500px;
+            height: 400px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            border:1px solid #000;
+        }
+        .title{
+            background: #000;
+            color: #fff;
+            padding: 0 10px;
+        }
+        .title-close{
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="showLogin=true">登录</button>
+        <button @click="showRegister=true">注册</button>
+        <!-- 登录弹出层： -->
+        <my-dialog v-show="showLogin" @close="showLogin=false">
+            <span slot="item">登录</span>
+            <div slot="dialog-content">
+                <p>
+                    <label>用户名：<input type="text"></label>                        
+                </p>
+                <p>
+                    <label>密码：<input type="password"></label>
+                </p>
+                <input type="submit" value="登录">
+            </div>
+        </my-dialog>
+        <!-- 注册弹出层： -->
+        <my-dialog v-show="showRegister" @close="showRegister=false"><!--当事件处理函数只有一行代码时可直接写在后面-->
+                <span slot="item">注册</span><!--代替组件中对应位置的slot代码,slot属性名即为原slot标签的name值-->
+                <div slot="dialog-content">
+                    <p>
+                        <label>姓名：<input type="text"></label>
+                    </p>
+                    <p>
+                        <label>学校：<input type="text"></label>
+                    </p>
+                    <p>
+                        <label>联系方式：<input type="text"></label>
+                    </p>
+                    <input type="submit" value="注册">
+                </div>
+        </my-dialog>
+    </div>
+
+    <!-- 封装组件： -->
+    <template id="dialog">
+        <div class="mask">
+            <div class="box">
+                <div class="title">
+                    <span class="title-item">
+                        <!--插槽：可理解为占位符,当组件的某部分内容不固定时可使用slot占位:-->
+                        <slot name="item">这里是默认标题</slot><!--可设置默认值-->
+                    </span>
+                    <span class="title-close" @click="$emit('close')">[X]</span><!--点击关闭当前弹出层-->
+                </div>
+                <div class="content">
+                    <slot name="dialog-content">这里是默认内容</slot>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            components:{//封装组件
+                myDialog:{ //组件名称
+                    template:"#dialog" //组件标签id名(当组件代码较多时可这样写)
+                }
+            },
+            data:{
+                showLogin:false,
+                showRegister:false
+            }
+        })
+    </script>
+</body>
+</html>
