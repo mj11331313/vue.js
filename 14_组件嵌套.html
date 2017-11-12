@@ -8,7 +8,9 @@
 </head>
 <body>
     <div id="app">
-        <family :msg="msg"></family>
+        <!--组件的事件必须使用.native修饰符才起作用-->
+        <family :msg="msg" @click.native="add"></family>
+        <div>{{num}}</div>
     </div>
     <script src="vue.js"></script>
     <script>
@@ -32,10 +34,16 @@
         new Vue({
             el:"#app",
             data:{
-                msg:"msg111"
+                msg:"msg111",
+                num:0
             },
             components:{
                 family:parent
+            },
+            methods:{
+                add(){
+                    this.num++;
+                }
             }
         })
     </script>
