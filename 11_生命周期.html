@@ -25,7 +25,7 @@
                     this.msg++;
                 },
                 destroy(){
-                    vm.$destroy();
+                    vm.$destroy();//vue自带的销毁函数
                 }
             },
             //在实例初始化之后，数据观测和事件配置之前被调用:
@@ -35,7 +35,7 @@
             //在实例创建完成后被立即调用:(计时器通常写在这里):
             created(){
                 console.log("created");
-                this.timer=setInterval(()=>{
+                this.timer=setInterval(()=>{//使用箭头函数防止this指向改变
                     console.log("timer");
                 },1000)
             },
@@ -44,7 +44,7 @@
                 console.log("beforeMount");
             },
             //挂载完成后调用:
-            mounted(){
+            mounted(){//发送请求一般写在次阶段
                 console.log("mounted");
             },
             //数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前:
