@@ -7,6 +7,30 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="app">
+        <!--通过改变is对应变量的值切换显示的组件:-->
+        <div :is="whichShow"></div>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                whichShow:'component2'
+            },
+            components:{
+                component1:{
+                    template:'<h1>template1</h1>'
+                },
+                component2:{
+                    template:'<h1>template2</h1>'
+                },
+                component3:{
+                    template:'<h1>template3</h1>'
+                }
+            }
+        })
+    </script>
 </body>
 </html>
