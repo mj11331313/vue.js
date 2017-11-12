@@ -29,7 +29,7 @@
                 }
             },
             //在实例初始化之后，数据观测和事件配置之前被调用:
-            beforeCreate(){
+            beforeCreate(){//加载动画可以写在此处
                 console.log("beforeCreate");
             },
             //在实例创建完成后被立即调用:
@@ -41,7 +41,7 @@
                 console.log("beforeMount");
             },
             //挂载完成后调用:
-            mounted(){//发送请求以及定时器一般写在次阶段
+            mounted(){//发送请求、定时器以及清除加载动画一般写在次阶段
                 console.log("mounted");
                 this.timer=setInterval(()=>{//使用箭头函数防止this指向改变
                     console.log("timer");
