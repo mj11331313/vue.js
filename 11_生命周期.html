@@ -41,7 +41,7 @@
                 console.log("beforeMount");
             },
             //挂载完成后调用:
-            mounted(){//发送请求、定时器以及清除加载动画一般写在次阶段
+            mounted(){//发送请求、定时器以及销毁加载动画一般写在次阶段
                 console.log("mounted");
                 this.timer=setInterval(()=>{//使用箭头函数防止this指向改变
                     console.log("timer");
