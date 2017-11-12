@@ -32,20 +32,20 @@
             beforeCreate(){
                 console.log("beforeCreate");
             },
-            //在实例创建完成后被立即调用:(计时器通常写在这里):
+            //在实例创建完成后被立即调用:
             created(){
-                console.log("created");
-                this.timer=setInterval(()=>{//使用箭头函数防止this指向改变
-                    console.log("timer");
-                },1000)
+                console.log("created");                
             },
             //在挂载之前被调用:
             beforeMount(){
                 console.log("beforeMount");
             },
             //挂载完成后调用:
-            mounted(){//发送请求一般写在次阶段
+            mounted(){//发送请求以及定时器一般写在次阶段
                 console.log("mounted");
+                this.timer=setInterval(()=>{//使用箭头函数防止this指向改变
+                    console.log("timer");
+                },1000)
             },
             //数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前:
             beforeUpdate(){
