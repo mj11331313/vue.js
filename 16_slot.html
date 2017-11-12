@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <hello>
+            <span slot="username">Cynthia</span><!--用该行代码代替对应位置的slot标签-->
+            <span slot="age">21</span>
+        </hello>
+
+        <hello>
+            <h1 slot="username">Bob</h1>
+            <p slot="age">20</p>
+        </hello>
+    </div>
+
+    <!--当组件代码较多时使用template标签,里面编写组件代码,
+        template标签根部只能有一个标签,
+        且template标签本身不会显示在dom结构里:-->
+    <template id="tem">
+        <!-- <ul>
+            <li>01</li>
+            <li>02</li>
+            <li>03</li>
+        </ul> -->
+        <div>
+            <div><!--slot可理解为占位符:-->
+                名字：<slot name="username"></slot><!--name值和要插入代码的slot属性值对应-->
+            </div>
+            <div>
+                年龄：<slot name="age"></slot>
+            </div>
+        </div>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            components:{
+                hello:{
+                    template:'#tem'  //对应template标签的id
+                }
+            }
+        })
+    </script>
+</body>
+</html>
