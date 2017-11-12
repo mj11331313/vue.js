@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{firstName}}+{{lastName}}={{fullName}}
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                firstName:"Fol",
+                lastName:"Bar",
+                fullName:''
+            },
+            /* computed:{ //computed会产生缓存(不用定义新的变量)
+                fullName(){
+                    return this.firstName + ' ' + this.lastName 
+                }
+            }, */
+            watch:{//当数据发生改变时网页的显示也会改变(监控),性能更好(需要定义新的变量)
+                firstName:function(val){//val:新的数据
+                    this.fullName = val + ' ' + this.lastName;
+                },
+                lastName:function(val){
+                    this.fullName = this.firstName + ' ' + val;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
